@@ -1,10 +1,22 @@
 <template>
-  <div :class="[$style.wrapper]">Моя кнопка</div>
+  <div
+    :class="[$style.wrapper]"
+    @click="onClick"
+  >
+    <slot name="content"></slot>
+  </div>
 </template>
 
 <script>
 export default {
-
+  methods: {
+    onClick () {
+      // метод $emit генерирует кастомное событие 'clicked,
+      // которое может обработать родительский компонет
+      // через оператор @clicked=""
+      this.$emit('clicked')
+    }
+  }
 }
 </script>
 

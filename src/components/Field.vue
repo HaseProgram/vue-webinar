@@ -1,35 +1,32 @@
 <template>
   <div :class="[$style.wrapper]">
+    <Card
+      v-for="(card, index) in getCards"
+      :key="index"
+      :id="card.id"
+      :idx="index"
+      :class="[$style.card]"
+    />
   </div>
 </template>
 
 <script>
-export default {
-  computed: {
-    getCards () {
-      return [
-        {
-          value: '0',
-          isVisible: false,
-          founded: false,
-        },
-        {
-          value: '1',
-          isVisible: false,
-          founded: false,
-        },
-        {
-          value: '2',
-          isVisible: false,
-          founded: false,
-        },
-      ]
-    }
+import { mapGetters } from 'vuex'
 
+import Card from './Card'
+
+export default {
+  components: {
+    Card,
+  },
+  computed: {
+    // подробнее в /store/cards.js
+    ...mapGetters('cards', [
+      'getCards'
+    ]),
   },
 }
 </script>
-
 
 <style module lang="scss">
 .wrapper {
